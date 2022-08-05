@@ -46,61 +46,6 @@
             </thead>
             <tbody>
 
-              <!-- <?php foreach ($model->rows as $key => $usuario) : ?>
-
-
-                <tr>
-                  <th scope="row"><?= $key + 1 ?></th>
-                  <td><?= $usuario['nome'] ?></td>
-                  <td><?= $usuario['cargo'] ?></td>
-                  <td><?= $usuario['perfil'] ?></td>
-                  <td><span class="badge badge-success">Ativo</span></td>
-                  <td>
-                    <button data-toggle="modal" data-target="#deleteModal" title="Desativar Usuário" class="btn btn-sm btn-danger"><i class="fa fa-square"></i></button>
-                  </td>
-                  <td>
-                    <button data-toggle="modal" data-target="#editModal" class="btn btn-sm btn-warning text-white"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                    <button data-collapse="button" class="btn btn-sm btn-primary"><i class="fa fa-plus-circle"></i></button>
-                  </td>
-                </tr>
-                <tr data-collapse="info">
-                  <td colspan="7">
-                    <div class="card">
-                      <div class="card-header">
-                        <div class="card-title">
-                          <h5>Sobre</h5>
-                        </div>
-                      </div>
-                      <div class="card-body">
-                        <div class="row">
-                          <div class="col-4">
-                            <h5>Endereço</h5>
-                            <p><b>Bairro:</b> <?= $usuario['bairro'] ?></p>
-                            <p><b>Cidade:</b> <?= $usuario['cidade'] ?></p>
-                            <p><b>Estado:</b> <?= $usuario['estado'] ?></p>
-                          </div>
-                          <div class="col-4">
-                            <h5>Contato</h5>
-                            <p><b>Telefone:</b> <?= $usuario['fone'] ?></p>
-                            <p><b>Telefone:</b> <?= $usuario['fone2'] ?></p>
-                            <p><b>E-mail:</b> <?= $usuario['email'] ?></p>
-                          </div>
-                          <div class="col-4">
-                            <h5>Status</h5>
-                            <p><b>Data cadastro:</b> <?= $usuario['data'] ?></p>
-                            <p><b>Hora cadastro:</b> <?= $usuario['hora'] ?> </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                  </td>
-                </tr>
-
-              <?php endforeach; ?> -->
-
-
-
             </tbody>
           </table>
         </div>

@@ -5,3 +5,5 @@ nav {background-color: #3c8dbc;}
 .navbar-brand {font-size: 18px; color: #fff;}
 section {padding: 1em 0; z-index: 1 !important;}
 .btn-group-toggle { display: inline-block; margin-bottom: 1em;}
+.btn-edit { margin-right: 1em; }
+i{ color: #fff; }

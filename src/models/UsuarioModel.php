@@ -69,6 +69,9 @@ class UsuarioModel
             $registro[] = $nome;
             $registro[] = $cargo;
             $registro[] = $perfil;
+            $registro[] = '<span class="badge badge-success">Ativo</span>';
+            $registro[] = '<button class="btn btn-sm btn-danger"><i class="fa fa-square"></i></button>';      
+            $registro[] = '<button class="btn btn-sm btn-warning btn-edit" onclick="editUsuario('.$id.')"><i class="fa fa-edit"></i> </button><button class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button>';      
             $dados[] = $registro;
         }
       

@@ -22,6 +22,10 @@ switch($url)
         UsuarioController::list();
     break;
 
+    case '/usuarios/edit':
+        UsuarioController::edit();
+    break;
+
     case '/usuarios/form/save':
         UsuarioController::save();
     break;   

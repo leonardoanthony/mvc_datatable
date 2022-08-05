@@ -9,6 +9,7 @@
   <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 
   <script src="src/views/js/datatable.js"></script>
+  <script src="src/views/js/editUsuario.js"></script>
 
   <script type="module" src="src/views/js/script.js"></script>
 

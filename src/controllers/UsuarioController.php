@@ -57,4 +57,12 @@ class UsuarioController extends Controller
 
         header("Location: /usuarios");
     }
+
+    public static function edit()
+    {
+        $model = new UsuarioModel;
+        $model->id = $_REQUEST['id'];
+        echo $model->id;
+        exit;
+    }
 }
