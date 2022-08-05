@@ -4,7 +4,6 @@ namespace src\DAO;
 
 use src\models\UsuarioModel;
 
-
 class UsuarioDAO extends DAO
 {
 
@@ -72,7 +71,7 @@ class UsuarioDAO extends DAO
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
-    public function getUsersLike($request)
+    public function getCountUsersDatatable($request)
     {
         $sql = "SELECT count(id_usuario) as qnt_usuarios FROM usuario";
         if(!empty($request['search']['value'])) {
@@ -84,5 +83,33 @@ class UsuarioDAO extends DAO
         $result_qtn = $this->conexao->prepare($sql);
         $result_qtn->execute();
         return $result_qtn->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    public function getUsersDatatable($request, $colunas)
+    {
+        $sql = "SELECT  `id_usuario` as id, 
+                        `nome`, 
+                        `nomecargo` as cargo,
+                        `perfil` 
+                FROM usuario";
+        
+        if(!empty($request['search']['value'])) {
+            $sql .= " WHERE `id_usuario` LIKE '%".$request['search']['value']."%'";
+            $sql .= " OR `nome` LIKE '%".$request['search']['value']."%'";
+            $sql .= " OR `nomecargo` LIKE '%".$request['search']['value']."%'";
+            $sql .= " OR `perfil` LIKE '%".$request['search']['value']."%'";
+        }
+        
+        //? Lógica para definir a ordenação das colunas;
+        $sql .= " ORDER BY ". $colunas[$request['order'][0]['column']]." "
+                        .$request['order'][0]['dir']
+                        // . " LIMIT 2;";
+                        . " LIMIT ".$request['start'].", ".$request['length'].";";
+                        
+        $stmt = $this->conexao->prepare($sql);
+
+        $stmt->execute();
+
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 }

@@ -62,38 +62,12 @@ class UsuarioModel
 
         $dao = new UsuarioDAO();
         
-        
-        //? Quantidade total de registro no banco
+        $quantidade_usuarios = $dao->getCountUsersDatatable($request);
 
-        $quantidade_usuarios = $dao->getUsersLike($request);
-        
-        //? Recuperando os dados do banco
-        $query_usuarios = "SELECT 
-                                `id_usuario` as id, 
-                                `nome`, 
-                                `nomecargo` as cargo,
-                                `perfil` 
-                            FROM usuario";
-        
-        if(!empty($requestData['search']['value'])) {
-            $query_usuarios .= " WHERE `id_usuario` LIKE '%".$requestData['search']['value']."%'";
-            $query_usuarios .= " OR `nome` LIKE '%".$requestData['search']['value']."%'";
-            $query_usuarios .= " OR `nomecargo` LIKE '%".$requestData['search']['value']."%'";
-            $query_usuarios .= " OR `perfil` LIKE '%".$requestData['search']['value']."%'";
-        }
-        
-        //? Lógica para definir a ordenação das colunas;
-        $query_usuarios .= " ORDER BY ". $colunas[$requestData['order'][0]['column']]." "
-                        .$requestData['order'][0]['dir']
-                        // . " LIMIT 2;";
-                        . " LIMIT ".$requestData['start'].", ".$requestData['length'].";";
-        
-        $result_data = MySql::conectar()->prepare($query_usuarios);
-        
-        $result_data->execute();
-        
-        while($row_user = $result_data->fetch(\PDO::FETCH_ASSOC)) {
-            extract($row_user);
+        $dados_usuario = $dao->getUsersDatatable($request, $this->colunas);
+
+        foreach($dados_usuario as $usuario){
+            extract($usuario);
             $registro = [];
             $registro[] = $id;
             $registro[] = $nome;
@@ -101,6 +75,7 @@ class UsuarioModel
             $registro[] = $perfil;
             $dados[] = $registro;
         }
+      
         
         //? Criar o array de informação a ser retornado
         $resposta = [
