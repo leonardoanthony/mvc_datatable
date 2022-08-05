@@ -13,6 +13,13 @@ class UsuarioController extends Controller
         $model->getAllRows();
         parent::render('Usuario/ListarUsuarios', $model);
     }
+    
+    public static function list()
+    {
+        $model = new UsuarioModel();
+        $model->returnJson();
+        parent::render('Usuario/ListaDatatable', $model);
+    }
 
     public static function form()
     {

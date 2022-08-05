@@ -2,6 +2,6 @@
 
 
 define('HOST','localhost');
-define('DB','mvc');
+define('DB','cafgrau_comercial');
 define('USER','root');
 define('PASS','');

@@ -3,30 +3,32 @@
 
 namespace src\helpers;
 
-include_once '/helpers/MySql.php';
+use src\models\UsuarioModel;
 
 $dados_requisicao = $_REQUEST;
 
 //?ordenar as colunas
-$colunas = [
-    '0' => 'id',
-    '1' => 'nome',
-    '2' => 'cargo',
-    '3' => 'perfil',
-];
+$colunas = UsuarioModel::colunas();
 
 
 //? Quantidade total de registro no banco
-$query_quantidade_usuarios = "SELECT count(id_usuario) as qnt_usuarios FROM usuario";
-if(!empty($dados_requisicao['search']['value'])) {
-    $query_quantidade_usuarios .= " WHERE `id_usuario` LIKE '%".$dados_requisicao['search']['value']."%'";
-    $query_quantidade_usuarios .= " OR `nome` LIKE '%".$dados_requisicao['search']['value']."%'";
-    $query_quantidade_usuarios .= " OR `nomecargo` LIKE '%".$dados_requisicao['search']['value']."%'";
-    $query_quantidade_usuarios .= " OR `perfil` LIKE '%".$dados_requisicao['search']['value']."%'";
+// $query_quantidade_usuarios = "SELECT count(id_usuario) as qnt_usuarios FROM usuario";
+// if(!empty($dados_requisicao['search']['value'])) {
+//     $query_quantidade_usuarios .= " WHERE `id_usuario` LIKE '%".$dados_requisicao['search']['value']."%'";
+//     $query_quantidade_usuarios .= " OR `nome` LIKE '%".$dados_requisicao['search']['value']."%'";
+//     $query_quantidade_usuarios .= " OR `nomecargo` LIKE '%".$dados_requisicao['search']['value']."%'";
+//     $query_quantidade_usuarios .= " OR `perfil` LIKE '%".$dados_requisicao['search']['value']."%'";
+// }
+// $result_qtn = MySql::conectar()->prepare($query_quantidade_usuarios);
+// $result_qtn->execute();
+// $quantidade_usuarios = $result_qtn->fetch(\PDO::FETCH_ASSOC);
+try {
+    $quantidade_usuarios = UsuarioModel::countRows();
+} catch (\Throwable $th) {
+    echo $th->getMessage();
 }
-$result_qtn = MySql::conectar()->prepare($query_quantidade_usuarios);
-$result_qtn->execute();
-$quantidade_usuarios = $result_qtn->fetch(\PDO::FETCH_ASSOC);
+
+
 
 //? Recuperando os dados do banco
 $query_usuarios = "SELECT 

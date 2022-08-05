@@ -10,6 +10,11 @@ class UsuarioModel
 
     public $rows;
 
+    public $request;
+    public $json;
+
+
+
     public function save()
     {
         $dao = new UsuarioDAO();
@@ -39,4 +44,24 @@ class UsuarioModel
         $dao->delete($id);
     }
 
+    public static function colunas()
+    {
+        return [
+            '0' => 'id',
+            '1' => 'nome',
+            '2' => 'cargo',
+            '3' => 'perfil',
+        ]; 
+    }
+
+    public static function countRows()
+    {
+        $dao = new UsuarioDAO();
+        $dao->countRows();
+    }
+
+    public function returnJson()
+    {
+        $this->json = UsuarioModel::countRows();
+    }
 }

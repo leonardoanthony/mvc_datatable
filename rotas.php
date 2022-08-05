@@ -18,6 +18,10 @@ switch($url)
         UsuarioController::form();
     break;
 
+    case '/usuarios/list':
+        UsuarioController::list();
+    break;
+
     case '/usuarios/form/save':
         UsuarioController::save();
     break;   

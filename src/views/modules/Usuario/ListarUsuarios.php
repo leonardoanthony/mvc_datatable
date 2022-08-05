@@ -1,6 +1,5 @@
 <?php include 'src/views/layout/header.php'; ?>
 
-
   <header id="header" class="position-fixed w-100 mb-3">
     <nav class="navbar ">
       <div class="container">
@@ -54,7 +53,7 @@
                   <th scope="row"><?= $key + 1 ?></th>
                   <td><?= $usuario['nome'] ?></td>
                   <td><?= $usuario['cargo'] ?></td>
-                  <td>Admin</td>
+                  <td><?= $usuario['perfil'] ?></td>
                   <td><span class="badge badge-success">Ativo</span></td>
                   <td>
                     <button data-toggle="modal" data-target="#deleteModal" title="Desativar Usuário" class="btn btn-sm btn-danger"><i class="fa fa-square"></i></button>

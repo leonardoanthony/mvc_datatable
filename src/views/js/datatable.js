@@ -6,7 +6,7 @@ $(document).ready(function () {
             url: "//cdn.datatables.net/plug-ins/1.12.1/i18n/pt-BR.json",
         },
         ajax: {
-            url: 'src/helpers/usuario/datatable.php',
+            url: '/usuarios/list',
             dataType: 'JSON',
         },
         columnDefs: [{

@@ -37,7 +37,7 @@ class UsuarioDAO extends DAO
 
     public function selectAll()
     {
-        $sql = "SELECT * FROM {$this->table} LIMIT 10";
+        $sql = "SELECT * FROM {$this->table} LIMIT 1";
         $stmt = $this->conexao->prepare($sql);
         $stmt->execute();
 
@@ -58,5 +58,14 @@ class UsuarioDAO extends DAO
 
         $stmt = $this->conexao->prepare($sql);
         $stmt->execute([$id]);
+    }
+
+    public function countRows()
+    {
+        $sql = "SELECT count(id_usuario) as qnt_usuarios FROM {$this->table}";
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 }
