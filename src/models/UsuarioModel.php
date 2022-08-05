@@ -56,10 +56,6 @@ class UsuarioModel
     public function buildJson($request)
     {
 
-        $requestData = $request;
-
-        $colunas = $this->colunas;
-
         $dao = new UsuarioDAO();
         
         $quantidade_usuarios = $dao->getCountUsersDatatable($request);
@@ -79,7 +75,7 @@ class UsuarioModel
         
         //? Criar o array de informação a ser retornado
         $resposta = [
-            "draw" => intval($requestData['draw']),
+            "draw" => intval($request['draw']),
             "recordsTotal" => intval($quantidade_usuarios['qnt_usuarios']),
             "recordsFiltered" => intval($quantidade_usuarios['qnt_usuarios']),
             "data" => $dados,
