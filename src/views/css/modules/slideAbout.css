@@ -1,0 +1,21 @@
+tr[data-collapse="info"] {
+    display: none;
+    opacity: 0;
+    transform: translateY(-30px);
+}
+
+tr[data-collapse="info"].ativo {
+    display: table-row;
+    animation: showUp .3s forwards;
+}
+
+tr[data-collapse="info"].ativo:hover {
+    background-color: transparent;
+}
+
+@keyframes showUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

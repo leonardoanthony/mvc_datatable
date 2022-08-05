@@ -1,0 +1,7 @@
+@import url('modules/slideAbout.css');
+
+#header.position-fixed{z-index: 1000 !important;}
+nav {background-color: #3c8dbc;}
+.navbar-brand {font-size: 18px; color: #fff;}
+section {padding: 1em 0; z-index: 1 !important;}
+.btn-group-toggle { display: inline-block; margin-bottom: 1em;}
