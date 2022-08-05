@@ -11,7 +11,7 @@ class UsuarioModel
     public $request;
     public $json;
 
-    public $columns = [
+    public $colunas = [
         '0' => 'id',
         '1' => 'nome',
         '2' => 'cargo',
@@ -56,28 +56,16 @@ class UsuarioModel
     public function buildJson($request)
     {
 
-        $dados_requisicao = $request;
+        $requestData = $request;
 
-        $colunas = [
-            '0' => 'id',
-            '1' => 'nome',
-            '2' => 'cargo',
-            '3' => 'perfil',
-        ];
+        $colunas = $this->colunas;
+
+        $dao = new UsuarioDAO();
         
         
         //? Quantidade total de registro no banco
-        $query_quantidade_usuarios = "SELECT count(id_usuario) as qnt_usuarios FROM usuario";
-        if(!empty($dados_requisicao['search']['value'])) {
-            $query_quantidade_usuarios .= " WHERE `id_usuario` LIKE '%".$dados_requisicao['search']['value']."%'";
-            $query_quantidade_usuarios .= " OR `nome` LIKE '%".$dados_requisicao['search']['value']."%'";
-            $query_quantidade_usuarios .= " OR `nomecargo` LIKE '%".$dados_requisicao['search']['value']."%'";
-            $query_quantidade_usuarios .= " OR `perfil` LIKE '%".$dados_requisicao['search']['value']."%'";
-        }
-        $result_qtn = MySql::conectar()->prepare($query_quantidade_usuarios);
-        $result_qtn->execute();
-        $quantidade_usuarios = $result_qtn->fetch(\PDO::FETCH_ASSOC);
-        
+
+        $quantidade_usuarios = $dao->getUsersLike($request);
         
         //? Recuperando os dados do banco
         $query_usuarios = "SELECT 
@@ -87,18 +75,18 @@ class UsuarioModel
                                 `perfil` 
                             FROM usuario";
         
-        if(!empty($dados_requisicao['search']['value'])) {
-            $query_usuarios .= " WHERE `id_usuario` LIKE '%".$dados_requisicao['search']['value']."%'";
-            $query_usuarios .= " OR `nome` LIKE '%".$dados_requisicao['search']['value']."%'";
-            $query_usuarios .= " OR `nomecargo` LIKE '%".$dados_requisicao['search']['value']."%'";
-            $query_usuarios .= " OR `perfil` LIKE '%".$dados_requisicao['search']['value']."%'";
+        if(!empty($requestData['search']['value'])) {
+            $query_usuarios .= " WHERE `id_usuario` LIKE '%".$requestData['search']['value']."%'";
+            $query_usuarios .= " OR `nome` LIKE '%".$requestData['search']['value']."%'";
+            $query_usuarios .= " OR `nomecargo` LIKE '%".$requestData['search']['value']."%'";
+            $query_usuarios .= " OR `perfil` LIKE '%".$requestData['search']['value']."%'";
         }
         
         //? Lógica para definir a ordenação das colunas;
-        $query_usuarios .= " ORDER BY ". $colunas[$dados_requisicao['order'][0]['column']]." "
-                        .$dados_requisicao['order'][0]['dir']
+        $query_usuarios .= " ORDER BY ". $colunas[$requestData['order'][0]['column']]." "
+                        .$requestData['order'][0]['dir']
                         // . " LIMIT 2;";
-                        . " LIMIT ".$dados_requisicao['start'].", ".$dados_requisicao['length'].";";
+                        . " LIMIT ".$requestData['start'].", ".$requestData['length'].";";
         
         $result_data = MySql::conectar()->prepare($query_usuarios);
         
@@ -116,7 +104,7 @@ class UsuarioModel
         
         //? Criar o array de informação a ser retornado
         $resposta = [
-            "draw" => intval($dados_requisicao['draw']),
+            "draw" => intval($requestData['draw']),
             "recordsTotal" => intval($quantidade_usuarios['qnt_usuarios']),
             "recordsFiltered" => intval($quantidade_usuarios['qnt_usuarios']),
             "data" => $dados,

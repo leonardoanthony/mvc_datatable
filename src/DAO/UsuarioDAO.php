@@ -71,4 +71,18 @@ class UsuarioDAO extends DAO
 
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
+
+    public function getUsersLike($request)
+    {
+        $sql = "SELECT count(id_usuario) as qnt_usuarios FROM usuario";
+        if(!empty($request['search']['value'])) {
+            $sql .= " WHERE `id_usuario` LIKE '%".$request['search']['value']."%'";
+            $sql .= " OR `nome` LIKE '%".$request['search']['value']."%'";
+            $sql .= " OR `nomecargo` LIKE '%".$request['search']['value']."%'";
+            $sql .= " OR `perfil` LIKE '%".$request['search']['value']."%'";
+        }
+        $result_qtn = $this->conexao->prepare($sql);
+        $result_qtn->execute();
+        return $result_qtn->fetch(\PDO::FETCH_ASSOC);
+    }
 }
