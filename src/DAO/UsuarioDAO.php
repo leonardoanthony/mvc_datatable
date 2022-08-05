@@ -37,7 +37,10 @@ class UsuarioDAO extends DAO
 
     public function selectAll()
     {
-        $sql = "SELECT * FROM {$this->table} LIMIT 1";
+        $sql = "SELECT  `id_usuario` as id, 
+                        `nome`, 
+                        `nomecargo` as cargo,
+                        `perfil`  FROM {$this->table} LIMIT 2";
         $stmt = $this->conexao->prepare($sql);
         $stmt->execute();
 

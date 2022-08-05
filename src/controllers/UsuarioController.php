@@ -17,7 +17,8 @@ class UsuarioController extends Controller
     public static function list()
     {
         $model = new UsuarioModel();
-        $model->returnJson();
+        $model->getAllRows();
+        $model->buildJson($_REQUEST);
         parent::render('Usuario/ListaDatatable', $model);
     }
 
