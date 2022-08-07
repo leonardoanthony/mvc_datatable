@@ -17,7 +17,6 @@ class UsuarioController extends Controller
     public static function list()
     {
         $model = new UsuarioModel();
-        $model->getAllRows();
         $model->buildJson($_REQUEST);
         parent::render('Usuario/ListaDatatable', $model);
     }
@@ -61,8 +60,12 @@ class UsuarioController extends Controller
     public static function edit()
     {
         $model = new UsuarioModel;
-        $model->id = $_REQUEST['id'];
-        echo $model->id;
-        exit;
+
+        if(isset($_GET['id'])){
+            $model->buildEditJson($_GET['id']);
+        }
+
+
+        parent::render('Usuario/editarUsuario', $model);
     }
 }
