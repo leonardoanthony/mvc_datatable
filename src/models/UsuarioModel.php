@@ -16,6 +16,7 @@ class UsuarioModel
         '1' => 'nome',
         '2' => 'cargo',
         '3' => 'perfil',
+        '4' => 'status'
     ];
 
     public function save()
@@ -62,15 +63,22 @@ class UsuarioModel
 
         $dados_usuario = $dao->getUsersDatatable($request, $this->colunas);
 
-        foreach($dados_usuario as $usuario){
+        foreach($dados_usuario as $key => $usuario){
             extract($usuario);
             $registro = [];
-            $registro[] = $id;
+
+            
+            $registro[] = $key + 1;
             $registro[] = $nome;
             $registro[] = $cargo;
             $registro[] = $perfil;
-            $registro[] = '<span class="badge badge-success">Ativo</span>';
-            $registro[] = '<button class="btn btn-sm btn-danger"><i class="fa fa-square"></i></button>';      
+            if($status){
+                $registro[] = '<span class="badge badge-success">Ativo</span>';
+                $registro[] = '<button class="btn btn-sm btn-danger"><i class="fa fa-square"></i></button>';      
+            }else{
+                $registro[] = '<span class="badge badge-danger">Desativado</span>';
+                $registro[] = '<button class="btn btn-sm btn-success"><i class="fa fa-check-square"></i></button>';
+            }
             $registro[] = '<button class="btn btn-sm btn-warning btn-edit" onclick="editUsuario('.$id.')"><i class="fa fa-edit"></i> </button><button class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button>';      
             $dados[] = $registro;
         }

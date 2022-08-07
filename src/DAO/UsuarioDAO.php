@@ -48,10 +48,10 @@ class UsuarioDAO extends DAO
 
     public function selectById(int $id)
     {
-        $sql = "SELECT * FROM {$this->table} WHERE `id` = ?";
+        $sql = "SELECT * FROM {$this->table} WHERE `id_usuario` = ?";
         $stmt = $this->conexao->prepare($sql);
         $stmt->execute([$id]);
-        return $stmt->fetchObject();
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
     public function delete(int $id)
@@ -78,7 +78,7 @@ class UsuarioDAO extends DAO
             $sql .= " WHERE `id_usuario` LIKE '%".$request['search']['value']."%'";
             $sql .= " OR `nome` LIKE '%".$request['search']['value']."%'";
             $sql .= " OR `nomecargo` LIKE '%".$request['search']['value']."%'";
-            $sql .= " OR `perfil` LIKE '%".$request['search']['value']."%'";
+            $sql .= " OR `status` LIKE '%".$request['search']['value']."%'";
         }
         $result_qtn = $this->conexao->prepare($sql);
         $result_qtn->execute();
@@ -90,14 +90,15 @@ class UsuarioDAO extends DAO
         $sql = "SELECT  `id_usuario` as id, 
                         `nome`, 
                         `nomecargo` as cargo,
-                        `perfil` 
+                        `perfil`, 
+                        `status` 
                 FROM usuario";
         
         if(!empty($request['search']['value'])) {
             $sql .= " WHERE `id_usuario` LIKE '%".$request['search']['value']."%'";
             $sql .= " OR `nome` LIKE '%".$request['search']['value']."%'";
             $sql .= " OR `nomecargo` LIKE '%".$request['search']['value']."%'";
-            $sql .= " OR `perfil` LIKE '%".$request['search']['value']."%'";
+            $sql .= " OR `status` LIKE '%".$request['search']['value']."%'";
         }
         
         //? Lógica para definir a ordenação das colunas;
