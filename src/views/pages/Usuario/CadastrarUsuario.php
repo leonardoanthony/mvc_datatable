@@ -1,5 +1,5 @@
 
-  <?php include 'src/views/layout/header.php'; ?>
+  <?php include 'src/views/partials/header.php'; ?>
 
     <fieldset>
         <legend>Cadastro de Usuário</legend>
@@ -22,4 +22,4 @@
 
     </fieldset>
 
-    <?php include 'src/views/layout/footer.php'; ?>
+    <?php include 'src/views/partials/footer.php'; ?>
