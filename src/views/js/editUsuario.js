@@ -1,14 +1,24 @@
 async function editUsuario(id){
 
+
     const promiseUser = await fetch(`/usuarios/edit?id=${id}`);
-    const promiseCargo = await fetch(`/usuarios/edit?table=cargo`);
+
+    let jsonCargo;
+
+    if(window.localStorage.getItem('jsonCargo')){
+        jsonCargo = window.localStorage.getItem('jsonCargo');
+    }else{
+        const promiseCargo = await fetch(`/usuarios/edit?table=cargo`);
+        jsonCargo = await promiseCargo.json();
+        window.localStorage.setItem('jsonCargo', jsonCargo);
+    }
+    
+    
     const promisePerfil = await fetch(`/usuarios/edit?table=perfil`);
-
+    
     const jsonUser = await promiseUser.json();
-    const jsonCargo = await promiseCargo.json();
     const jsonPerfil = await promisePerfil.json();
-
-
+    
     
     if(jsonUser['status']){
         
@@ -19,9 +29,9 @@ async function editUsuario(id){
 
         jsonCargo.forEach(({idcargo, nomecargo}) => {
             if(jsonUser['data'].idcargo == idcargo){
-                cargoOptions += `<option selected value="${idcargo},${nomecargo}">${nomecargo}</option>`;
+                cargoOptions += `<option selected value="${idcargo}, ${nomecargo}">${nomecargo}</option>`;
             }else {
-                cargoOptions += `<option value="${idcargo},${nomecargo}">${nomecargo}</option>`;
+                cargoOptions += `<option value="${idcargo}, ${nomecargo}">${nomecargo}</option>`;
             }
         });
         jsonPerfil.forEach(({idperfil, nomeperfil}) => {
@@ -52,3 +62,4 @@ async function editUsuario(id){
         document.getElementById('response-alert').innerHTML = `<div class="alert alert-danger" role="alert">${jsonUser['message']}</div>`;
     }
 }
+

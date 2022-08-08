@@ -104,10 +104,10 @@ class UsuarioModel
             $registro[] = $perfil;
             if($status){
                 $registro[] = '<span class="badge badge-success">Ativo</span>';
-                $registro[] = '<button class="btn btn-sm btn-danger"><i class="fa fa-square"></i></button>';      
+                $registro[] = '<button class="btn btn-sm btn-danger" onclick="toggleStatusUsuario('.$id.', '.$status.')"><i class="fa fa-square"></i></button>';      
             }else{
                 $registro[] = '<span class="badge badge-danger">Desativado</span>';
-                $registro[] = '<button class="btn btn-sm btn-success"><i class="fa fa-check-square"></i></button>';
+                $registro[] = '<button class="btn btn-sm btn-success" onclick="toggleStatusUsuario('.$id.', '.$status.')"><i class="fa fa-check-square"></i></button>';
             }
             $registro[] = '<button class="btn btn-sm btn-warning btn-edit" onclick="editUsuario('.$id.')"><i class="fa fa-edit"></i> </button><button class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button>';      
             $dados[] = $registro;
