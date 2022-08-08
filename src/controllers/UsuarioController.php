@@ -36,15 +36,9 @@ class UsuarioController extends Controller
     {
 
         $model =  new UsuarioModel();
+        $model->save($_POST);
 
-        $model->id = $_POST['editId'];
-        $model->nome = $_POST['editNome'];
-        $model->login = $_POST['editLogin'];
-        $model->senha = $_POST['editSenha'];
-
-        $model->save();
-
-        // header("Location: /usuarios");
+        header("Location: /usuarios");
     }
 
     public static function delete()

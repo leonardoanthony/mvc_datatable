@@ -6,7 +6,7 @@ use src\DAO\UsuarioDAO;
 
 class UsuarioModel
 {
-    public $id, $nome, $login, $senha, $cargo, $perfil, $endereco, $bairro, $cidade, $estado, $fone, $fone2, $email;
+    // public $id, $nome, $login, $senha, $cargo, $perfil, $endereco, $bairro, $cidade, $estado, $fone, $fone2, $email;
     public $rows;
     public $table;
     public $request;
@@ -20,17 +20,37 @@ class UsuarioModel
         '4' => 'status'
     ];
 
-    public function save()
+    public function save($post)
     {
         $dao = new UsuarioDAO();
+        
+        $this->id = $post['editId'];
 
-
-        var_dump($this);
-        die();
+        $cargo = explode(',',$post['editCargo']);
 
         if (empty($this->id)) {
-            $dao->insert($this);
+            // $dao->insert($this);
         } else {
+
+            $this->nome = $post['editNome'];
+            $this->login = $post['editLogin'];
+            $this->senha = $post['editSenha'];
+            if($cargo[0] == 3){
+                $this->idcargo = $cargo[0];
+                $this->cargo = 'Gerente';
+            }else{
+                $this->idcargo = $cargo[0];
+                $this->cargo = $cargo[1];
+            }
+            $this->perfil = $post['editPerfil'];
+            $this->endereco = $post['editEndereco'];
+            $this->bairro = $post['editBairro'];
+            $this->cidade = $post['editCidade'];
+            $this->estado = $post['editEstado'];
+            $this->fone = $post['editFone'];
+            $this->fone2 = $post['editFone2'];
+            $this->email = $post['editEmail'];
+            
             $dao->update($this);
         }
     }

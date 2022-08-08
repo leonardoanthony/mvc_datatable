@@ -19,9 +19,9 @@ async function editUsuario(id){
 
         jsonCargo.forEach(({idcargo, nomecargo}) => {
             if(jsonUser['data'].idcargo == idcargo){
-                cargoOptions += `<option selected value="${idcargo}">${nomecargo}</option>`;
+                cargoOptions += `<option selected value="${idcargo},${nomecargo}">${nomecargo}</option>`;
             }else {
-                cargoOptions += `<option value="${idcargo}">${nomecargo}</option>`;
+                cargoOptions += `<option value="${idcargo},${nomecargo}">${nomecargo}</option>`;
             }
         });
         jsonPerfil.forEach(({idperfil, nomeperfil}) => {
@@ -31,6 +31,7 @@ async function editUsuario(id){
                 perfilOptions += `<option value="${idperfil}">${nomeperfil}</option>`;
             }
         });
+
 
         document.forms.editModal.elements.editId.value = jsonUser['data'].id_usuario;
         document.forms.editModal.elements.editNome.value = jsonUser['data'].nome;

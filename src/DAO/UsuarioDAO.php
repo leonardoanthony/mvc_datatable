@@ -23,23 +23,7 @@ class UsuarioDAO extends DAO
 
     public function update(UsuarioModel $model)
     {
-        $sql = "UPDATE {$this->table} SET 
-
-                `idcargo` = ?,
-                `nome` = ?, 
-                `login` = ?, 
-                `senha` = ? 
-                `cargo` = ?,
-                `perfil` = ?,
-                `end` = ?,
-                `bairro` = ?,
-                `cidade` = ?,
-                `estado` = ?,
-                `fone` = ?,
-                `fone2` = ?,
-                `email` = ?,
-                
-                WHERE `id_usuario` = ?";
+        $sql = "UPDATE {$this->table} SET  `idcargo` = ?, `nome` = ?,  `login` = ?,  `senha` = ?,  `cargo` = ?, `perfil` = ?, `end` = ?, `bairro` = ?, `cidade` = ?, `estado` = ?, `fone` = ?, `fone2` = ?, `email` = ? WHERE `id_usuario` = ?";
 
         $stmt = $this->conexao->prepare($sql);
         $stmt->execute([

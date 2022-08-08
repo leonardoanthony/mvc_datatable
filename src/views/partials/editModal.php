@@ -21,15 +21,15 @@
               <label for="Cargo">
                 <h5>Cargo</h5>
               </label>
-              <select id="editCargo" class="form-control" name="editLogin">
+              <select id="editCargo" class="form-control" name="editCargo">
                 <option value="Gerente">Gerente</option>
               </select>
             </div>
             <div class="form-group  col-6">
-              <label for="Perfil">
+              <label for="Perfil"  >
                 <h5>Perfil</h5>
               </label>
-              <select id="editPerfil" class="form-control">
+              <select id="editPerfil" class="form-control" name="editPerfil">
                 <option>Admin</option>
               </select>
             </div>
@@ -54,7 +54,7 @@
               <label for="Endereco">
                 <h5>Endereco</h5>
               </label>
-              <input type="text" class="form-control" id="editEndereco" placeholder="Endereco" value="Recife">
+              <input type="text" class="form-control" id="editEndereco" placeholder="Endereco" value="Recife" name="editEndereco">
             </div>
           </div>
           <div class="form-row">
@@ -62,7 +62,7 @@
               <label for="Estado">
                 <h5>Estado</h5>
               </label>
-              <select id="editEstado" class="form-control">
+              <select id="editEstado" class="form-control" name="editEstado">
                 <option value="AC">Acre</option>
                 <option value="AL">Alagoas</option>
                 <option value="AP">Amapá</option>
@@ -97,13 +97,13 @@
               <label for="Cidade">
                 <h5>Cidade</h5>
               </label>
-              <input type="text" class="form-control" id="editCidade" placeholder="Cidade" value="Recife">
+              <input type="text" class="form-control" id="editCidade" placeholder="Cidade"  name="editCidade">
             </div>
             <div class="form-group  col-4">
               <label for="Bairro">
                 <h5>Bairro</h5>
               </label>
-              <input type="text" class="form-control" id="editBairro" placeholder="Bairro" value="Centro">
+              <input type="text" class="form-control" id="editBairro" placeholder="Bairro" name="editBairro" >
             </div>
           </div>
           <div class="form-row">
@@ -111,19 +111,19 @@
               <label for="Telefone">
                 <h5>Telefone</h5>
               </label>
-              <input type="text" class="form-control" id="editTelefone" placeholder="Telefone" value="(81) 9999-9999">
+              <input type="text" class="form-control" id="editTelefone" placeholder="Telefone" name="editFone">
             </div>
             <div class="form-group col-3">
               <label for="Telefone">
                 <h5>Telefone2</h5>
               </label>
-              <input type="text" class="form-control" id="editTelefone2" placeholder="Telefone" value="(81) 9999-9999">
+              <input type="text" class="form-control" id="editTelefone2" placeholder="Telefone" name="editFone2">
             </div>
             <div class="form-group col-6">
               <label for="E-mail">
                 <h5>E-mail</h5>
               </label>
-              <input type="text" class="form-control" id="editEmail" placeholder="E-mail" value="emanoel@grautecnico.com">
+              <input type="text" class="form-control" id="editEmail" placeholder="E-mail" name="editEmail">
             </div>
           </div>
           <div class="modal-footer">
