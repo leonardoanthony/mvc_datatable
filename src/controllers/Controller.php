@@ -6,7 +6,7 @@ abstract class Controller
 {
     protected static function render($view, $model = null)
     {
-        $arquivo_view = "src/views/modules/$view.php";
+        $arquivo_view = "src/views/pages/$view.php";
         if(file_exists($arquivo_view)){
             include $arquivo_view;
         } else {
