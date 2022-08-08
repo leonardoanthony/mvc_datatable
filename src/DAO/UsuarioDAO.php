@@ -23,13 +23,39 @@ class UsuarioDAO extends DAO
 
     public function update(UsuarioModel $model)
     {
-        $sql = "UPDATE {$this->table} SET `nome` = ?, `login` = ?, `senha` = ? WHERE `id` = ?";
+        $sql = "UPDATE {$this->table} SET 
+
+                `idcargo` = ?,
+                `nome` = ?, 
+                `login` = ?, 
+                `senha` = ? 
+                `cargo` = ?,
+                `perfil` = ?,
+                `end` = ?,
+                `bairro` = ?,
+                `cidade` = ?,
+                `estado` = ?,
+                `fone` = ?,
+                `fone2` = ?,
+                `email` = ?,
+                
+                WHERE `id_usuario` = ?";
 
         $stmt = $this->conexao->prepare($sql);
         $stmt->execute([
+            $model->idcargo,
             $model->nome,
             $model->login,
             $model->senha,
+            $model->cargo,
+            $model->perfil,
+            $model->endereco,
+            $model->bairro,
+            $model->cidade,
+            $model->estado,
+            $model->fone,
+            $model->fone2,
+            $model->email,
             $model->id,
         ]);
     }
@@ -38,8 +64,8 @@ class UsuarioDAO extends DAO
     {
         $sql = "SELECT  `id_usuario` as id, 
                         `nome`, 
-                        `nomecargo` as cargo,
-                        `perfil`  FROM {$this->table} LIMIT 2";
+                        `cargo`,
+                        `perfil`  FROM {$this->table}";
         $stmt = $this->conexao->prepare($sql);
         $stmt->execute();
 
@@ -77,7 +103,7 @@ class UsuarioDAO extends DAO
         if(!empty($request['search']['value'])) {
             $sql .= " WHERE `id_usuario` LIKE '%".$request['search']['value']."%'";
             $sql .= " OR `nome` LIKE '%".$request['search']['value']."%'";
-            $sql .= " OR `nomecargo` LIKE '%".$request['search']['value']."%'";
+            $sql .= " OR `cargo` LIKE '%".$request['search']['value']."%'";
             $sql .= " OR `status` LIKE '%".$request['search']['value']."%'";
         }
         $result_qtn = $this->conexao->prepare($sql);
@@ -89,7 +115,7 @@ class UsuarioDAO extends DAO
     {
         $sql = "SELECT  `id_usuario` as id, 
                         `nome`, 
-                        `nomecargo` as cargo,
+                        `cargo` as cargo,
                         `perfil`, 
                         `status` 
                 FROM usuario";
@@ -97,7 +123,7 @@ class UsuarioDAO extends DAO
         if(!empty($request['search']['value'])) {
             $sql .= " WHERE `id_usuario` LIKE '%".$request['search']['value']."%'";
             $sql .= " OR `nome` LIKE '%".$request['search']['value']."%'";
-            $sql .= " OR `nomecargo` LIKE '%".$request['search']['value']."%'";
+            $sql .= " OR `cargo` LIKE '%".$request['search']['value']."%'";
             $sql .= " OR `status` LIKE '%".$request['search']['value']."%'";
         }
         
@@ -111,6 +137,14 @@ class UsuarioDAO extends DAO
 
         $stmt->execute();
 
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function getTable($table)
+    {
+        $sql = "SELECT * FROM {$table}";
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 }
