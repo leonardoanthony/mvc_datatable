@@ -8,48 +8,49 @@
         </button>
       </div>
       <div class="modal-body">
-        <form name="editModal">
+        <form name="editModal" method="post" action="/usuarios/form/save">
           <div class="form-group">
-            <input type="hidden" value="" id="editId">
+            <input type="hidden" id="editId" name="editId">
             <label for="Nome">
               <h5>Nome</h5>
             </label>
-            <input type="text" class="form-control" id="editNome" placeholder="Nome">
+            <input type="text" class="form-control" id="editNome" name="editNome" placeholder="Nome">
           </div>
-          <!-- <div class="form-row">
-              <div class="form-group col-6">
-                <label for="Cargo">
-                  <h5>Cargo</h5>
-                </label>
-                <select id="editCargo" class="form-control">
-                  <option value="Gerente">Gerente</option>
-                </select>
-              </div>
-              <div class="form-group  col-6">
-                <label for="Perfil">
-                  <h5>Perfil</h5>
-                </label>
-                <select id="editPerfil" class="form-control">
-                  <option>Admin</option>
-                </select>
-              </div>
-            </div> -->
+          <div class="form-row">
+            <div class="form-group col-6">
+              <label for="Cargo">
+                <h5>Cargo</h5>
+              </label>
+              <select id="editCargo" class="form-control" name="editLogin">
+                <option value="Gerente">Gerente</option>
+              </select>
+            </div>
+            <div class="form-group  col-6">
+              <label for="Perfil">
+                <h5>Perfil</h5>
+              </label>
+              <select id="editPerfil" class="form-control">
+                <option>Admin</option>
+              </select>
+            </div>
+          </div>
           <div class="form-row">
             <div class="form-group col-6">
               <label for="Login">
                 <h5>Login</h5>
               </label>
-              <input type="text" class="form-control" id="editLogin" placeholder="Login">
+              <input type="text" class="form-control" id="editLogin" name="editLogin" placeholder="Login">
             </div>
             <div class="form-group col-6">
               <label for="Senha">
                 <h5>Senha</h5>
               </label>
-              <input type="password" class="form-control" id="editSenha" placeholder="Senha">
+              <input type="password" class="form-control" id="editSenha" name="editSenha" placeholder="Senha">
             </div>
           </div>
+
           <div class="form-row">
-          <div class="form-group  col-12">
+            <div class="form-group  col-12">
               <label for="Endereco">
                 <h5>Endereco</h5>
               </label>
@@ -125,12 +126,13 @@
               <input type="text" class="form-control" id="editEmail" placeholder="E-mail" value="emanoel@grautecnico.com">
             </div>
           </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-success">Salvar</button>
+          </div>
         </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-success">Salvar</button>
-      </div>
+
     </div>
   </div>
 </div>

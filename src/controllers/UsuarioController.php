@@ -34,16 +34,17 @@ class UsuarioController extends Controller
 
     public static function save()
     {
+
         $model =  new UsuarioModel();
 
-        $model->id = $_POST['id'];
-        $model->nome = $_POST['nome'];
-        $model->login = $_POST['login'];
-        $model->senha = $_POST['senha'];
+        $model->id = $_POST['editId'];
+        $model->nome = $_POST['editNome'];
+        $model->login = $_POST['editLogin'];
+        $model->senha = $_POST['editSenha'];
 
         $model->save();
 
-        header("Location: /usuarios");
+        // header("Location: /usuarios");
     }
 
     public static function delete()
@@ -65,7 +66,19 @@ class UsuarioController extends Controller
             $model->buildEditJson($_GET['id']);
         }
 
+        if(isset($_GET['table'])){
+            $model->getConfigTable($_GET['table']);
+            self::listTable($model);
+        }
 
         parent::render('Usuario/editarUsuario', $model);
     }
+
+    private static function listTable($model)
+    {
+        $newModel = new UsuarioModel();
+        $newModel->table = $model->table;
+        parent::render('Usuario/ListaTabelaConfigUsuario', $newModel);
+    }
+
 }

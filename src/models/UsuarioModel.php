@@ -3,11 +3,12 @@
 namespace src\models;
 
 use src\DAO\UsuarioDAO;
-use src\helpers\MySql;
 
 class UsuarioModel
 {
-    public $id, $nome, $login, $senha, $rows;
+    public $id, $nome, $login, $senha, $cargo, $perfil, $endereco, $bairro, $cidade, $estado, $fone, $fone2, $email;
+    public $rows;
+    public $table;
     public $request;
     public $json;
 
@@ -22,6 +23,11 @@ class UsuarioModel
     public function save()
     {
         $dao = new UsuarioDAO();
+
+
+        var_dump($this);
+        die();
+
         if (empty($this->id)) {
             $dao->insert($this);
         } else {
@@ -54,6 +60,12 @@ class UsuarioModel
         $dao->countRows();
     }
 
+    public function getConfigTable($table)
+    {
+        $dao = new UsuarioDAO();
+        $this->table = $dao->getTable($table);
+    }
+
     public function buildJson($request)
     {
 
@@ -66,8 +78,6 @@ class UsuarioModel
         foreach($dados_usuario as $key => $usuario){
             extract($usuario);
             $registro = [];
-
-            
             $registro[] = $key + 1;
             $registro[] = $nome;
             $registro[] = $cargo;
@@ -95,4 +105,26 @@ class UsuarioModel
         $this->json = json_encode($resposta);
 
     }
+
+    public function buildEditJson($id)
+    {
+        $dao = new UsuarioDAO();
+
+        $user = $dao->selectById($id);
+
+        if($user){
+            $resposta = [
+                'status' => true,
+                'data' => $user,
+            ];
+        }else{
+            $resposta = [
+                'status' => false,
+                'message' => 'Usuário não encontrado, contate o suporte',
+            ];
+        }
+
+        $this->json = json_encode($resposta);
+    }
+
 }
